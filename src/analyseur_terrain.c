@@ -121,6 +121,8 @@ T_Terrain AT_parserTerrain(FILE* flux) {
     
     // 2. Lecture de positon de départ et de l'orientation initiale 
     unsigned int caseDepart = 0;
+    int compteurObjectifs = 0;
+    int compteurChemins = 0;
     char orientationChar = 'N';
     
     if (!AT_lireNombre(flux, &caseDepart)) {
@@ -162,16 +164,32 @@ T_Terrain AT_parserTerrain(FILE* flux) {
                 CO_Coordonnee coord1 = CO_NumeroCaseVersCoordonnee(case1, largeur);
                 CO_Coordonnee coord2 = CO_NumeroCaseVersCoordonnee(case2, largeur);
                 T_ajouterChemin(&terrain, coord1, coord2);
+                compteurChemins++;
             }
         } else {
             // C'est un objectif  
+                      // C'est un objectif  
             unsigned int caseObjectif;
             if (sscanf(buffer, "%u", &caseObjectif) == 1) {
                 CO_Coordonnee coordObjectif = CO_NumeroCaseVersCoordonnee(caseObjectif, largeur);
+                printf("DEBUG: Ajout objectif case %u -> coord(%d, %d)\n", 
+                       caseObjectif, coordObjectif.x, coordObjectif.y);
                 T_ajouterObjectif(&terrain, coordObjectif);
+                compteurObjectifs++;
+                
+                // Vérifier immédiatement après l'ajout
+                printf("DEBUG: Cardinalité après ajout = %u\n", 
+                       THE_cardinalite(terrain.positionsObjectifs));
             }
         }
     }
     
+    printf("DEBUG: Total chemins ajoutés = %d\n", compteurChemins);
+    printf("DEBUG: Total objectifs parsés = %d\n", compteurObjectifs);
+    printf("DEBUG: Cardinalité finale = %u\n", THE_cardinalite(terrain.positionsObjectifs));
+    
     return terrain;
 }
+
+
+    
