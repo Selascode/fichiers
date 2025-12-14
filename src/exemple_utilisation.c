@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     }
     
     // Parser le terrain
-    T_Terrain terrain = PT_parserTerrain(fichier);
+    T_Terrain terrain = AT_parserTerrain(fichier);
     
     if (fichier != stdin) {
         fclose(fichier);
