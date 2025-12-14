@@ -8,15 +8,15 @@ CO_Coordonnee CO_coordonnee(unsigned int x, unsigned int y){
 	c.x = x;
 	c.y = y;
 	return c;
-};
+}
 
 unsigned int CO_abscisse(CO_Coordonnee coord){
     return coord.x;
-};
+}
 
 unsigned int CO_ordonnee(CO_Coordonnee coord){
     return coord.y;
-};
+}
 
 CO_Coordonnee CO_obtenirCoordonneeDirection(CO_Coordonnee coord,
 				 DI_Direction direction){
@@ -29,7 +29,7 @@ CO_Coordonnee CO_obtenirCoordonneeDirection(CO_Coordonnee coord,
 	case N : newcoord.x = CO_abscisse(coord); newcoord.y = CO_ordonnee(coord) -1; break;
 }
 	return newcoord;
-};
+}
 
 CO_Coordonnee CO_NumeroCaseVersCoordonnee(unsigned int numero, unsigned int largeur){
 	assert(numero>0);
@@ -37,16 +37,16 @@ CO_Coordonnee CO_NumeroCaseVersCoordonnee(unsigned int numero, unsigned int larg
 	c.x = (numero-1)%largeur;
 	c.y = (numero-1)/largeur;
 	return c;
-};
+}
 
 unsigned int CO_CoordonneeVersNumeroCase(CO_Coordonnee c, unsigned int largeur){
 	return CO_ordonnee(c)*largeur + CO_abscisse(c) + 1;
-};
+}
 
 
 bool CO_sontEgales(CO_Coordonnee coord1, CO_Coordonnee coord2){
     return CO_abscisse(coord1)==CO_abscisse(coord2) || CO_ordonnee(coord1)==CO_ordonnee(coord2);
-};
+}
 
 
 void* CO_copier(void* pcoord){
@@ -55,13 +55,13 @@ void* CO_copier(void* pcoord){
 	pnewcoord->x = CO_abscisse(*(CO_Coordonnee*)pcoord);
 	pnewcoord->y = CO_ordonnee(*(CO_Coordonnee*)pcoord);
 	return pnewcoord;
-};
+}
 
 void CO_liberer(void* pcoord){
     free(pcoord);
-};
+}
 
 
 int CO_comparer(void* pcoord1,void* pcoord2){
 	return CO_sontEgales(*(CO_Coordonnee*)pcoord1, *(CO_Coordonnee*)pcoord2);
-};
+}
