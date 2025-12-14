@@ -11,6 +11,7 @@
 int main(int argc, char* argv[]) {
     FILE* fichier = NULL;
     
+    // Ouvrir le fichier passé en argument 
     if (argc > 1) {
         printf("Ouverture du fichier : %s\n", argv[1]);
         fichier = fopen(argv[1], "r");
@@ -19,23 +20,24 @@ int main(int argc, char* argv[]) {
             return 1;
         }
     } else {
-        fichier = stdin;
-        printf("Entrez la description du terrain (terminez par un point) :\n");
+        printf("Usage ./exemple_utilisation [nom de fichier]\n");
+        return 1; 
     }
     
-    // Analyser le terrain
-    printf("Analyse  du terrain...\n");
-    T_Terrain terrain = AT_parserTerrain(fichier);
-    
-    if (fichier != stdin) {
-        fclose(fichier);
-    }
+    // Analyse du terrain
+    printf("=========================== \n");
+    printf("Analyse du terrain\n");
+    printf("=========================== \n");
+
+    T_Terrain terrain = AT_analyseurTerrain(fichier);
+
     
     // Afficher les informations du terrain
-    printf("\n=== Terrain parsé ===\n");
+    printf("\n=== Terrain analysé ===\n");
     printf("Taille : %u x %u\n", T_obtenirTaille(terrain), T_obtenirTaille(terrain));
     
     CO_Coordonnee posDepart = T_obtenirPositionDepart(terrain);
+
     printf("Position de départ : case %u soit (%u, %u)\n",
            CO_CoordonneeVersNumeroCase(posDepart, T_obtenirTaille(terrain)),
            CO_abscisse(posDepart), CO_ordonnee(posDepart));
@@ -43,22 +45,41 @@ int main(int argc, char* argv[]) {
     DI_Direction dirDepart = T_obtenirDirectionDepart(terrain);
     const char* directions[] = {"Nord", "Est", "Sud", "Ouest"};
     printf("Direction de départ : %s\n", directions[dirDepart]);
-    
-    // Afficher les objectifs
     printf("\nObjectifs :\n");
-    LCL_Liste listeObjectifs = THE_elements(T_obtenirObjectifs(terrain));
-    unsigned int nbObjectifs = LCL_longueur(listeObjectifs);
+    
+    //  Accès directe à la structure 
+    THE_Ensemble ensembleObjectifs = terrain.positionsObjectifs;
+    unsigned int nbObjectifs = THE_cardinalite(ensembleObjectifs);
+    
     printf("Nombre d'objectifs : %u\n", nbObjectifs);
     
-    for (unsigned int i = 0; i < nbObjectifs; i++) {
-        CO_Coordonnee* pCoord = (CO_Coordonnee*)LCL_element(listeObjectifs, i);
-        if (pCoord != NULL) {
-            printf("  - Case %u : (%u, %u)\n",
-                   CO_CoordonneeVersNumeroCase(*pCoord, T_obtenirTaille(terrain)),
-                   CO_abscisse(*pCoord), CO_ordonnee(*pCoord));
-            free(pCoord);
+    // Obtenir la liste des éléments
+    LCL_Liste listeObjectifs = THE_elements(ensembleObjectifs);
+    unsigned int longueurListe = LCL_longueur(listeObjectifs);
+    
+    
+    if (longueurListe > 0) {
+        for (unsigned int i = 0; i < longueurListe; i++) {
+            CO_Coordonnee* pCoord = (CO_Coordonnee*)LCL_element(listeObjectifs, i);
+            if (pCoord != NULL) {
+                unsigned int numCase = CO_CoordonneeVersNumeroCase(*pCoord, T_obtenirTaille(terrain));
+                printf("  - Case %u : (%u, %u)\n",
+                       numCase,
+                       CO_abscisse(*pCoord), 
+                       CO_ordonnee(*pCoord));
+                       
+                // Vérifier avec T_estUnObjectif
+                bool estObjectif = T_estUnObjectif(terrain, *pCoord);
+                printf("    Vérification T_estUnObjectif: %s\n", 
+                       estObjectif ? "OUI" : "NON");
+                
+                free(pCoord);
+            } else {
+                printf("  - Élément %u : NULL\n", i);
+            }
         }
     }
+
     LCL_vider(&listeObjectifs);
     
     // Vérifier quelques chemins

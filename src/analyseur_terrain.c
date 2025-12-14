@@ -99,7 +99,7 @@ static int AT_lireLigne(FILE* flux, char* buffer, size_t taille) {
 }
 
 
-T_Terrain AT_parserTerrain(FILE* flux) {
+T_Terrain AT_analyseurTerrain(FILE* flux) {
     if (flux == NULL) {
         // Retourner un terrain vide par défaut
         return T_terrain(0);
@@ -110,6 +110,7 @@ T_Terrain AT_parserTerrain(FILE* flux) {
     
     // 1. Lecture : largeur du terrain
     if (!AT_lireNombre(flux, &largeur) || largeur == 0) {
+        printf("ERREUR : lecture de largeur");
         return T_terrain(0);
     }
     
@@ -121,17 +122,17 @@ T_Terrain AT_parserTerrain(FILE* flux) {
     
     // 2. Lecture de positon de départ et de l'orientation initiale 
     unsigned int caseDepart = 0;
-    int compteurObjectifs = 0;
-    int compteurChemins = 0;
     char orientationChar = 'N';
     
     if (!AT_lireNombre(flux, &caseDepart)) {
+        printf("ERREUR : lecture lecture de la case de départ");
         T_supprimerTerrain(&terrain);
         return T_terrain(0);
     }
     
     AT_ignorerEspaces(flux);
     if (!AT_lireCaractere(flux, &orientationChar)) {
+        printf("ERREUR : lecture lecture de l'orientation de départ");
         T_supprimerTerrain(&terrain);
         return T_terrain(0);
     }
@@ -164,30 +165,17 @@ T_Terrain AT_parserTerrain(FILE* flux) {
                 CO_Coordonnee coord1 = CO_NumeroCaseVersCoordonnee(case1, largeur);
                 CO_Coordonnee coord2 = CO_NumeroCaseVersCoordonnee(case2, largeur);
                 T_ajouterChemin(&terrain, coord1, coord2);
-                compteurChemins++;
             }
         } else {
             // C'est un objectif  
-                      // C'est un objectif  
             unsigned int caseObjectif;
             if (sscanf(buffer, "%u", &caseObjectif) == 1) {
                 CO_Coordonnee coordObjectif = CO_NumeroCaseVersCoordonnee(caseObjectif, largeur);
-                printf("DEBUG: Ajout objectif case %u -> coord(%d, %d)\n", 
-                       caseObjectif, coordObjectif.x, coordObjectif.y);
                 T_ajouterObjectif(&terrain, coordObjectif);
-                compteurObjectifs++;
-                
-                // Vérifier immédiatement après l'ajout
-                printf("DEBUG: Cardinalité après ajout = %u\n", 
-                       THE_cardinalite(terrain.positionsObjectifs));
             }
         }
     }
-    
-    printf("DEBUG: Total chemins ajoutés = %d\n", compteurChemins);
-    printf("DEBUG: Total objectifs parsés = %d\n", compteurObjectifs);
-    printf("DEBUG: Cardinalité finale = %u\n", THE_cardinalite(terrain.positionsObjectifs));
-    
+
     return terrain;
 }
 

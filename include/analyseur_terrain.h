@@ -13,7 +13,7 @@
 #include "terrain.h"
 
 /**
- * \brief Parse un flux texte et construit un terrain
+ * \brief analyse un flux texte et construit un terrain
  * \param flux Le flux d'entrée à parser
  * \return Le terrain construit à partir du flux
  * 
@@ -24,6 +24,6 @@
  * - Lignes finales : numero_case (objectifs)
  * - Fin : . (point)
  */
-T_Terrain AT_parserTerrain(FILE* flux);
+T_Terrain AT_analyseurTerrain(FILE* flux);
 
 #endif
