@@ -43,9 +43,9 @@ unsigned int CO_CoordonneeVersNumeroCase(CO_Coordonnee c, unsigned int largeur){
 	return CO_ordonnee(c)*largeur + CO_abscisse(c) + 1;
 }
 
-
+// CORRECTION CRITIQUE : ET logique au lieu de OU
 bool CO_sontEgales(CO_Coordonnee coord1, CO_Coordonnee coord2){
-    return CO_abscisse(coord1)==CO_abscisse(coord2) || CO_ordonnee(coord1)==CO_ordonnee(coord2);
+    return CO_abscisse(coord1)==CO_abscisse(coord2) && CO_ordonnee(coord1)==CO_ordonnee(coord2);
 }
 
 
@@ -63,5 +63,5 @@ void CO_liberer(void* pcoord){
 
 
 int CO_comparer(void* pcoord1,void* pcoord2){
-	return CO_sontEgales(*(CO_Coordonnee*)pcoord1, *(CO_Coordonnee*)pcoord2);
+	return CO_sontEgales(*(CO_Coordonnee*)pcoord1, *(CO_Coordonnee*)pcoord2) ? 0 : 1;
 }
