@@ -117,7 +117,7 @@ T_Terrain AT_analyseurTerrain(FILE* flux) {
     // Aller jusqu'à la fin de la ligne 
     fgets(buffer, sizeof(buffer), flux);
     
-    // Création du térain 
+    // Création du terrain 
     T_Terrain terrain = T_terrain(largeur);
     
     // 2. Lecture de positon de départ et de l'orientation initiale 
