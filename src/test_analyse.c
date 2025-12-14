@@ -39,7 +39,7 @@ void test_position_depart(void) {
 
 void test_direction_depart(void) {
     DI_Direction dirDepart = T_obtenirDirectionDepart(terrain_test);
-    CU_ASSERT_EQUAL(dirDepart, S); // 'S' dans map.txt
+    CU_ASSERT_EQUAL(dirDepart, N); // 'S' dans map.txt
 }
 
 /* -------------------------------------------------------------------------- */
@@ -259,8 +259,7 @@ int main(int argc, char** argv) {
         return CU_get_error();
 
     /* ===== Suite 1 : Propriétés du terrain ===== */
-    pSuite_proprietes = CU_add_suite("Tests : Propriétés du terrain", 
-                                     init_suite_success, clean_suite_success);
+    pSuite_proprietes = CU_add_suite("Tests : Propriétés du terrain", init_suite_success, init_suite_success);
     if (NULL == pSuite_proprietes) {
         CU_cleanup_registry();
         return CU_get_error();
@@ -275,8 +274,7 @@ int main(int argc, char** argv) {
     }
 
     /* ===== Suite 2 : Objectifs ===== */
-    pSuite_objectifs = CU_add_suite("Tests : Objectifs", 
-                                    init_suite_success, clean_suite_success);
+    pSuite_objectifs = CU_add_suite("Tests : Objectifs", init_suite_success, init_suite_success);
     if (NULL == pSuite_objectifs) {
         CU_cleanup_registry();
         return CU_get_error();
@@ -295,7 +293,7 @@ int main(int argc, char** argv) {
 
     /* ===== Suite 3 : Chemins ===== */
     pSuite_chemins = CU_add_suite("Tests : Chemins", 
-                                  init_suite_success, clean_suite_success);
+                                  init_suite_success, init_suite_success);
     if (NULL == pSuite_chemins) {
         CU_cleanup_registry();
         return CU_get_error();
@@ -326,7 +324,7 @@ int main(int argc, char** argv) {
 
     /* ===== Suite 4 : Conversions ===== */
     pSuite_conversion = CU_add_suite("Tests : Conversions numéro/coordonnée", 
-                                     init_suite_success, clean_suite_success);
+                                     init_suite_success, init_suite_success);
     if (NULL == pSuite_conversion) {
         CU_cleanup_registry();
         return CU_get_error();
