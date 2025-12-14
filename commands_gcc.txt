@@ -1,0 +1,10 @@
+gcc -o parseur_test exemple_utilisation.c parseur_terrain.c analyseur_terrain.c coordonnee.c direction.c graphe.c listechainee.c ListeChaineeListeChainee.c tableHachage.c TableHachageDictionnaire.c TableHachageEnsemble.c terrain.c copieLiberationComparaisonTypesSimples.c -lm
+
+# Compilation
+gcc -o parseur_test exemple_utilisation.c parseur_terrain.c analyseur_terrain.c coordonnee.c direction.c graphe.c listechainee.c ListeChaineeListeChainee.c tableHachage.c TableHachageDictionnaire.c TableHachageEnsemble.c terrain.c copieLiberationComparaisonTypesSimples.c -lm
+
+# Exécution avec le fichier de test
+./parseur_test exemple_terrain.txt
+
+# Ou lecture depuis stdin
+./parseur_test
