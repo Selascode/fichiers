@@ -129,8 +129,6 @@ T_Terrain AT_analyseurTerrain(FILE* flux) {
         T_supprimerTerrain(&terrain);
         return T_terrain(0);
     }
-    
-    AT_ignorerEspaces(flux);
     if (!AT_lireCaractere(flux, &orientationChar)) {
         printf("ERREUR : lecture lecture de l'orientation de départ");
         T_supprimerTerrain(&terrain);

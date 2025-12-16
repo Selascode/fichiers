@@ -2,7 +2,7 @@
  * \file test_analyse.c
  * \brief Exemple d'utilisation du parseur de terrain
  */
-#include<CUnit/Basic.h>
+#include <CUnit/Basic.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "analyseur_terrain.h"
