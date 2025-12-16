@@ -9,6 +9,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "copieLiberationComparaisonTypesSimples.h"
+#include "chemin.h"
+#include "terrain.h"  
+#include "ListeChaineeFile.h"
+
 #include <limits.h> /* Pour INT_MAX */
 
 /* -------------------------------------------------------------------------- */
