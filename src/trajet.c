@@ -19,9 +19,9 @@
  * \brief Vide le chemin 'segment' et ajoute ses étapes à 'cheminPrincipal'.
  */
 static void TR_ajouterSegment(CH_Chemin* cheminPrincipal, CH_Chemin* segment) {
-    while (longueurChemin(segment) > 0) {
-        CO_Coordonnee etape = defilerEtape(segment);
-        enfilerEtape(cheminPrincipal, &etape);
+    while (CH_longueurChemin(segment) > 0) {
+        CO_Coordonnee etape = CH_defilerEtape(segment);
+        CH_enfilerEtape(cheminPrincipal, &etape);
     }
 }
 
@@ -277,7 +277,7 @@ CH_Chemin TR_obtenirParcours(T_Terrain terrain, CO_Coordonnee depart, CO_Coordon
     return TR_meilleurParcours(depart, objectifs, nbObjectifs);
 }
 
-LCF_File TR_conversionCheminInstr(CH_Chemin chemin, Direction dirInitiale) {
+LCF_File TR_conversionCheminInstr(CH_Chemin chemin, DI_Direction dirInitiale) {
     LCF_File instructions;
      instructions = FILE_file(NULL, NULL); 
     return instructions;

@@ -12,8 +12,8 @@
 #include "coordonnee.h"
 #include "direction.h"
 #include "chemin.h"
-#include "file.h"
 #include "terrain.h"  
+#include "ListeChaineeFile.h"
 
 /* -------------------------------------------------------------------------- */
 /* PARTIE PUBLIQUE                                                            */
@@ -53,6 +53,6 @@ CH_Chemin TR_meilleurParcours(CO_Coordonnee depart, CO_Coordonnee objectifs[], i
  * \param dirInitiale La direction initiale du robot.
  * \return La file d'instructions pour le robot.
  */
-LCF_File TR_conversionCheminInstr(CH_Chemin chemin, Direction dirInitiale) ; 
+LCF_ListeChaineeFile TR_conversionCheminInstr(CH_Chemin chemin, DI_Direction dirInitiale) ; 
 
 #endif
