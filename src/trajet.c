@@ -273,12 +273,12 @@ CH_Chemin TR_meilleurParcours(CO_Coordonnee depart, CO_Coordonnee objectifs[], i
     return cheminComplet;
 }
 
-CH_Chemin TR_obtenirParcours(T_Terrain terrain, CO_Coordonnee depart, CO_Coordonnee objectifs[], int nbObjectifs) {
-    return TR_meilleurParcours(depart, objectifs, nbObjectifs);
-}
+// CH_Chemin TR_obtenirParcours(T_Terrain terrain, CO_Coordonnee depart, CO_Coordonnee objectifs[], int nbObjectifs) {
+//     return TR_meilleurParcours(depart, objectifs, nbObjectifs);
+// }
 
-LCF_File TR_conversionCheminInstr(CH_Chemin chemin, DI_Direction dirInitiale) {
-    LCF_File instructions;
-     instructions = FILE_file(NULL, NULL); 
-    return instructions;
-}
+// LCF_File TR_conversionCheminInstr(CH_Chemin chemin, DI_Direction dirInitiale) {
+//     LCF_File instructions;
+//      instructions = FILE_file(NULL, NULL); 
+//     return instructions;
+// }
