@@ -205,7 +205,7 @@ LCL_Liste G_sommets(G_Graphe g) {
   return LCL_copier(g.sommets);
 }
 
-LCL_Liste G_obtenirSommetsAdjascents(G_Graphe g, unsigned int idSrc) {
+LCL_Liste G_obtenirSommetsAdjacents(G_Graphe g, unsigned int idSrc) {
   return LCL_liste(CLCTS_copierInt, CLCTS_libererInt);
 }
 

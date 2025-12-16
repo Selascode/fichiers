@@ -13,6 +13,7 @@
 #include "chemin.h"
 #include "terrain.h"  
 #include "ListeChaineeFile.h"
+#include "graphe.h"
 
 #include <limits.h> /* Pour INT_MAX */
 
