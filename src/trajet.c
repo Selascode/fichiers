@@ -19,7 +19,7 @@
  * \brief Vide le chemin 'segment' et ajoute ses étapes à 'cheminPrincipal'.
  */
 static void TR_ajouterSegment(CH_Chemin* cheminPrincipal, CH_Chemin* segment) {
-    while (CH_longueurChemin(segment) > 0) {
+    while (CH_longueurChemin(*segment) > 0) {
         CO_Coordonnee etape = CH_defilerEtape(segment);
         CH_enfilerEtape(cheminPrincipal, &etape);
     }
@@ -229,8 +229,9 @@ CH_Chemin TR_plusCourtChemin(T_Terrain terrain, CO_Coordonnee depart, CO_Coordon
 }
 
 CH_Chemin TR_meilleurParcours(CO_Coordonnee depart, CO_Coordonnee objectifs[], int nbObjectifs) {
-    CH_Chemin cheminComplet = chemin();
+    CH_Chemin cheminComplet = CH_chemin(); 
     CO_Coordonnee positionActuelle = depart;
+    T_Terrain t = T_terrain(5); 
 
     int estVisite[4] = {0}; 
     int nbVisites = 0;
@@ -255,7 +256,7 @@ CH_Chemin TR_meilleurParcours(CO_Coordonnee depart, CO_Coordonnee objectifs[], i
         /* 2. Si on a trouvé un voisin */
         if (indexPlusProche != -1) {
             /* Calculer le vrai chemin (A*) vers cet objectif */
-            CH_Chemin segment = TR_plusCourtChemin(NULL, positionActuelle, objectifs[indexPlusProche]);
+            CH_Chemin segment = TR_plusCourtChemin(t, positionActuelle, objectifs[indexPlusProche]);
             
             /* Ajouter ce segment au chemin final */
             TR_ajouterSegment(&cheminComplet, &segment);
