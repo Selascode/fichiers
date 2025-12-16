@@ -38,7 +38,7 @@ int main (int argc, char ** argv){
     
     // Attention: S'assurer que la case 13 existe pour ce terrain
     // Pour être robuste, on peut vérifier que 13 < largeur*hauteur
-    CO_Coordonnee fin = CO_NumeroCaseVersCoordonnee(1    3, T_obtenirTaille(t)); 
+    CO_Coordonnee fin = CO_NumeroCaseVersCoordonnee(13, T_obtenirTaille(t)); 
 
     printf("Calcul du chemin de (%u, %u) vers (%u, %u)...\n", 
            CO_abscisse(depart), CO_ordonnee(depart), 
